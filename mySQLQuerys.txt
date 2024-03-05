@@ -1,0 +1,847 @@
+1.
+    
+Query all columns for all American cities in the CITY table with populations larger than 100000.
+The CountryCode for America is USA.
+
+The CITY table is described as follows:
+
+CITY
+
+Field
+ID
+NAME
+Type
+NUMBER
+VARCHAR2 ( 17)
+COUNTRYCODE VARCHAR2(3)
+DISTRICT
+VARCHAR2 (20 )
+POPULATION
+NUMBER
+
+SOLUTION:
+
+select * from city
+where population > 100000 and countrycode = 'USA'
+
+======================================================================================================================
+
+2.
+
+Query the NAME field for all American cities in the CITY table with populations larger than 120000. 
+The CountryCode for America is USA.
+
+The CITY table is described as follows:
+
+CITY
+Field
+ID
+NAME
+Type
+NUMBER
+VARCHAR2 ( 17)
+COUNTRYCODE VARCHAR2 (3)
+DISTRICT
+VARCHAR2 ( 20)
+POPULATION NUMBER
+
+SOLUTION:
+
+select name from city
+where population > 120000 and countrycode = "USA"
+
+======================================================================================================================
+
+3.
+
+Query all columns (attributes) for every row in the CITY table.
+
+The CITY table is described as follows:
+
+CITY
+Field
+Type
+ID
+NUMBER
+NAME
+VARCHAR2 ( 17)
+COUNTRYCODE VARCHAR2 (3)
+DISTRICT
+POPULATION
+VARCHAR2 (20 )
+NUMBER
+
+SOLUTION:
+
+select * from city
+
+======================================================================================================================
+
+4.
+
+Query all columns for a city in CITY with the ID 1661.
+
+The CITY table is described as follows:
+
+CITY
+Field
+ID
+Type
+NUMBER
+NAME
+VARCHAR2 (17)
+COUNTRYCODE VARCHAR2 (3)
+DISTRICT
+VARCHAR2 (20 )
+POPULATION NUMBER
+
+SOLUTION:
+
+select * from city
+where id = "1661"
+
+======================================================================================================================
+
+5.
+
+Query all attributes of every Japanese city in the CITY table. The COUNTRYCODE for Japan is JPN.
+
+CITY
+Field
+ID
+Type
+NUMBER
+NAME
+VARCHAR2 (17)
+COUNTRYCODE VARCHAR2 (3)
+DISTRICT
+VARCHAR2 (20 )
+POPULATION
+NUMBER
+
+SOLUTION:
+
+select * from city
+where countrycode = "JPN"
+
+======================================================================================================================
+
+6.
+
+Query the names of all the Japanese cities in the CITY table. The COUNTRYCODE for Japan is JPN.
+The CITY table is described as follows:
+
+CITY
+Field
+ID
+Type
+NUMBER
+NAME
+VARCHAR2 ( 17)
+COUNTRYCODE VARCHAR2(3)
+DISTRICT
+VARCHAR2 (20 )
+POPULATION NUMBER
+
+SOLUTION:
+
+select name  from city
+where countrycode = "JPN"
+
+======================================================================================================================
+
+7.
+
+Query a list of CITY and STATE from the STATION table.
+The STATION table is described as follows:
+
+Field
+ID
+CITY
+STATE
+LAT_N
+LONG_W
+STATION
+Type
+NUMBER
+VARCHAR2 (21)
+VARCHAR2 (2)
+NUMBER
+NUMBER
+
+SOLUTION:
+
+select city, state
+from station 
+
+======================================================================================================================
+
+8.
+
+Query a list of CITY names from STATION for cities that have an even ID number. 
+Print the results in any order, but exclude duplicates from the answer.
+The STATION table is described as follows:
+
+Field
+ID
+CITY
+STATE
+LAT_N
+LONG_W
+STATION
+Type
+NUMBER
+VARCHAR2 (21)
+VARCHAR2 (2)
+NUMBER
+NUMBER
+
+SOLUTION:
+
+select distinct city 
+from station
+where id % 2 =0
+
+======================================================================================================================
+
+9.
+
+Find the difference between the total number of CITY entries in the table and 
+the number of distinct CITY entries in the table.
+The STATION table is described as follows:
+
+Field
+ID
+CITY
+STATE
+LAT N
+LONG W
+STATION
+Type
+NUMBER
+VARCHAR2 (21)
+VARCHAR2 (2)
+NUMBER
+NUMBER
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+For example, if there are three records in the table with CITY values 'New York', 'New York', 'Bengalaru', 
+there are 2 different city names: 'New York' and 'Bengalaru'. The query returns 1, because
+total number of records - number of unique city names = 3 - 2 = 1.
+
+SOLUTION:
+
+select count(city) - count(distinct city)
+from station 
+
+======================================================================================================================
+
+10.
+
+Query the two cities in STATION with the shortest and longest CITY names, 
+as well as their respective lengths (i.e.: number of characters in the name). 
+If there is more than one smallest or largest city, choose the one that comes first when ordered alphabetically.
+The STATION table is described as follows:
+
+Field
+ID
+CITY
+STATE
+LAT N
+LONG_W
+STATION
+Type
+NUMBER
+VARCHAR2 (21)
+VARCHAR2 (2)
+NUMBER
+NUMBER
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+Sample Input
+
+For example, CITY has four entries: DEF, ABC, PQRS and WXY.
+
+Sample Output
+
+ABC 3
+PQRS 4
+Explanation
+
+When ordered alphabetically, the CITY names are listed as ABC, DEF, PQRS, and WXY, with lengths 3,3,4 and 3. The longest name is PQRS, but there are  options for shortest named city. Choose ABC, because it comes first alphabetically.
+
+Note
+You can write two separate queries to get the desired output. It need not be a single query.
+
+SOLUTION:
+
+select city, length(city) from station
+order by length(city),city asc
+limit 1;
+select city, length(city) from station
+order by length(city) desc
+limit 1;
+
+======================================================================================================================
+
+11.
+
+Query the list of CITY names starting with vowels (i.e., a, e, i, o, or u) from STATION. 
+Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+Field
+ID
+CITY
+STATE
+LAT N
+LONG_W
+STATION
+Type
+NUMBER
+VARCHAR2 (21)
+VARCHAR2 (2)
+NUMBER
+NUMBER
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+SOLUTION:
+
+SELECT DISTINCT city
+FROM   station
+WHERE  city RLIKE '^[aeiouAEIOU].'
+
+======================================================================================================================
+
+12.
+
+Query the list of CITY names ending with vowels (a, e, i, o, u) from STATION. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+Field
+ID
+CITY
+STATE
+LAT_N
+LONG_W
+STATION
+Type
+NUMBER
+VARCHAR2 (21)
+VARCHAR2 (2)
+NUMBER
+NUMBER
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+SOLUTION:
+
+select distinct city
+from station 
+where city RLIKE '[aeiouAEIOU]$'
+
+======================================================================================================================
+
+13.
+
+Query the list of CITY names from STATION which have vowels (i.e., a, e, i, o, and u) 
+as both their first and last characters. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+Field
+ID
+CITY
+STATE
+LAT_N
+LONG_W
+STATION
+Type
+NUMBER
+VARCHAR2 (21)
+VARCHAR2 (2)
+NUMBER
+NUMBER
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+SOLUTION:
+
+select distinct city
+from station 
+where city RLIKE '^[aeiouAEIOU].*[aeiouAEIOU]$'
+
+======================================================================================================================
+
+14.
+
+Query the list of CITY names from STATION that do not start with vowels. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+Field
+ID
+CITY
+STATE
+LAT N
+LONG_W
+STATION
+Type
+NUMBER
+VARCHAR2 (21)
+VARCHAR2 (2)
+NUMBER
+NUMBER
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+SOLUTION:
+
+select distinct city
+from station
+where city NOT RLIKE '^[aeiouAEIOU].'
+
+======================================================================================================================
+
+15.
+
+Query the list of CITY names from STATION that do not end with vowels. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+Field
+ID
+CITY
+STATE
+LAT_N
+LONG_W
+STATION
+Type
+NUMBER
+VARCHAR2 (21)
+VARCHAR2 (2)
+NUMBER
+NUMBER
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+SOLUTION:
+
+select distinct city 
+from station 
+where city NOT RLIKE '[aeiouAEIOU]$'
+
+======================================================================================================================
+
+16.
+
+Query the list of CITY names from STATION that either do not start with vowels or do not end with vowels. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+Field
+ID
+CITY
+STATE
+LAT_N
+LONG_W
+STATION
+Type
+NUMBER
+VARCHAR2 (21)
+VARCHAR2 (2)
+NUMBER
+NUMBER
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+SOLUTION:
+
+select distinct city
+from station 
+where city NOT RLIKE '^[aeiouAEIOU].*[aeiouAEIOU]$'
+
+======================================================================================================================
+
+17.
+
+Query the list of CITY names from STATION that do not start with vowels and do not end with vowels. Your result cannot contain duplicates.
+
+Input Format
+
+The STATION table is described as follows:
+
+Field
+ID
+CITY
+STATE
+LAT_N
+LONG_W
+STATION
+Type
+NUMBER
+VARCHAR2 (21)
+VARCHAR2 (2)
+NUMBER
+NUMBER
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+SOLUTION:
+
+select distinct city
+from station 
+where city NOT RLIKE '^[aeiouAEIOU].' and city NOT RLIKE '[aeiouAEIOU]$'
+
+======================================================================================================================
+
+18.
+
+Query the Name of any student in STUDENTS who scored higher than 75 Marks. 
+Order your output by the last three characters of each name. 
+If two or more students both have names ending in the same last three characters (i.e.: Bobby, Robby, etc.), secondary sort them by ascending ID.
+
+Input Format
+
+The STUDENTS table is described as follows:
+
+Column
+ID
+Name
+Marks
+Type
+Integer
+String
+Integer
+
+The Name column only contains uppercase (A-Z) and lowercase (a-z) letters.
+
+Sample Input
+
+ID
+1
+2
+4
+3
+Name
+Ashley
+Samantha
+Julia
+Belvet
+Marks
+81
+75
+76
+84
+
+Sample Output
+
+Ashley
+Julia
+Belvet
+Explanation
+
+Only Ashley, Julia, and Belvet have Marks > 75. 
+If you look at the last three characters of each of their names, there are no duplicates and 'ley' < 'lia' < 'vet'.
+
+SOLUTION:
+
+SELECT name
+from students
+where marks > 75
+order by RIGHT(name, 3), id asc
+
+======================================================================================================================
+
+19.
+
+Write a query that prints a list of employee names (i.e.: the name attribute) from 
+the Employee table in alphabetical order.
+
+Input Format
+
+The Employee table containing employee data for a company is described as follows:
+
+Column
+employee_id
+name
+months
+salary
+Type
+Integer
+String
+Integer
+Integer
+
+where employee_id is an employee's ID number, name is their name, 
+months is the total number of months they've been working for the company, and salary is their monthly salary.
+
+Sample Input
+
+employee_id
+12228
+33645
+45692
+56118
+59725
+74197
+78454
+83565
+98607
+99989
+name
+Rose
+Angela
+Frank
+Patrick
+Lisa
+Kimberly
+Bonnie
+Michael
+Todd
+Joe
+months
+15
+1
+17
+7
+11
+16
+8
+6
+5
+9
+salary
+1968
+3443
+1608
+1345
+2330
+4372
+1771
+2017
+3396
+3573
+
+Sample Output
+
+Angela
+Bonnie
+Frank
+Joe
+Kimberly
+Lisa
+Michael
+Patrick
+Rose
+Todd
+
+SOLUTION:
+
+select name
+from employee
+order by name asc
+
+======================================================================================================================
+
+20.
+
+Write a query that prints a list of employee names (i.e.: the name attribute) for employees in 
+Employee having a salary greater than $2000 per month who have been employees for less than 10 months. 
+Sort your result by ascending employee_id.
+
+Input Format
+
+The Employee table containing employee data for a company is described as follows:
+
+Column
+employee_id
+name
+months
+salary
+Type
+Integer
+String
+Integer
+Integer
+
+where employee_id is an employee's ID number, name is their name, months is the total number of 
+months they've been working for the company, and salary is the their monthly salary.
+
+Sample Input
+
+employee_id
+12228
+33645
+45692
+56118
+59725
+74197
+78454
+83565
+98607
+99989
+name
+Rose
+Angela
+Frank
+Patrick
+Lisa
+Kimberly
+Bonnie
+Michael
+Todd
+Joe
+months
+15
+1
+17
+7
+11
+16
+8
+6
+5
+9
+salary
+1968
+3443
+1608
+1345
+2330
+4372
+1771
+2017
+3396
+3573
+
+Sample Output
+
+Angela
+Michael
+Todd
+Joe
+Explanation
+
+Angela has been an employee for 1 month and earns $3443 per month.
+
+Michael has been an employee for 6 months and earns $2017 per month.
+
+Todd has been an employee for 5 months and earns $3396 per month.
+
+Joe has been an employee for 9 months and earns $3573 per month.
+
+We order our output by ascending employee_id.
+
+SOLUTION:
+
+select name
+from employee
+where salary > 2000 and months < 10 
+order by employee_id asc
+
+======================================================================================================================
+
+21.
+
+Given the CITY and COUNTRY tables, query the names of all the continents (COUNTRY.Continent) and their respective 
+average city populations (CITY.Population) rounded down to the nearest integer.
+
+Note: CITY.CountryCode and COUNTRY.Code are matching key columns.
+
+Input Format
+
+The CITY and COUNTRY tables are described as follows:
+
+CITY
+Field
+Type
+ID
+NUMBER
+NAME
+VARCHAR2 ( 17)
+COUNTRYCODE VARCHAR2(3)
+DISTRICT
+VARCHAR2 (20 )
+POPULATION
+NUMBER
+
+Field
+CODE
+NAME
+CONTINENT
+REGION
+SURFACEAREA
+INDEPYEAR
+POPULATION
+LIFEEXPECTANCY
+GNP
+GNPOLD
+LOCALNAME
+GOVERNMENTFORM
+HEADOFSTATE
+CAPITAL
+CODE2
+COUNTRY
+Type
+VARCHAR2 (3)
+VARCHAR2 (44)
+VARCHAR2 (13)
+VARCHAR2 (25)
+NUMBER
+VARCHAR2 (5)
+NUMBER
+VARCHAR2 (4)
+NUMBER
+VARCHAR2 (9)
+VARCHAR2 (44)
+VARCHAR2 (44)
+VARCHAR2 (32)
+VARCHAR2 (4)
+VARCHAR2 (2)
+
+SOLUTION:
+
+SELECT COUNTRY.CONTINENT, FLOOR(AVG(CITY.POPULATION))
+FROM CITY INNER JOIN COUNTRY 
+ON CITY.COUNTRYCODE = COUNTRY.CODE
+GROUP BY COUNTRY.CONTINENT;
+
+======================================================================================================================
+
+22.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
